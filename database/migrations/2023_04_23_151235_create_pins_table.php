@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('pins', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('flag_id');
             $table->string('title');
             $table->text('text');
-            $table->integer('flag')->default(4);
             $table->timestamps();
+
+            $table->foreign('flag_id')->references('id')->on('flags');
         });
     }
 
