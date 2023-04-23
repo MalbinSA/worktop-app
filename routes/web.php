@@ -18,9 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    return view('test');
+Route::get('/plan', function () {
+    return view('plan');
 });
+
+Route::get('/list-pins', [\App\Http\Controllers\Pins\PinController::class, 'index']);
 
 // Laravel Breeze +
 
