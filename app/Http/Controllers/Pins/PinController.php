@@ -40,4 +40,20 @@ class PinController extends Controller
         return view('pins.show', compact('pin'));
 
     }
+
+    public function create()
+    {
+        $flags=Flag::all();
+        return view('pins.create', compact('flags'));
+    }
+
+    public function store(PinRequest $request)
+    {
+        Pin::create([
+            'title' => $request->title,
+            'text' => $request->text,
+            'flag_id' => $request->flag_id,
+        ]);
+        return redirect()->route('pins.index');
+    }
 }
