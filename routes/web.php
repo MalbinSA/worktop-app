@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pins\PinController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    return view('test');
+Route::get('/plan', function () {
+    return view('plan');
 });
+
+Route::get('/pins', [PinController::class, 'index'])->name('pins.index');
+Route::get('/pins/create', [PinController::class, 'create'])->name('pins.create');
+Route::post('/pins', [PinController::class, 'store'])->name('pins.store');
 
 // Laravel Breeze +
 
