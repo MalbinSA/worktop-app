@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('laravel');
 
 Route::get('/plan', function () {
     return view('plan');
