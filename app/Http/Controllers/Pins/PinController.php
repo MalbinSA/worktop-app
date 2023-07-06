@@ -34,4 +34,9 @@ class PinController extends Controller
         ]);
         return redirect()->route('pins.index');
     }
+
+    public function show($pin_id){
+        $pin = Pin::find($pin_id);
+        return view('pins.show', compact('pin'));
+    }
 }
