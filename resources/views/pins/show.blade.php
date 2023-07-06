@@ -9,8 +9,8 @@
     <div class="bg-white rounded-lg shadow-md p-4 mx-auto">
         <div class="flex items-center mb-4">
             <h2 class="text-xl font-semibold mr-2">{{ $pin->title }}</h2>
-            <div>
-                <p>{{$pin->flag_id}}</p>
+            <div class="bg-red-500 rounded-b h-15 w-14">
+                {{$flag->color}}
             </div>
         </div>
         <p class="text-gray-600">{{$pin->text}}</p>
