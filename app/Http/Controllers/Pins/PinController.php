@@ -59,6 +59,7 @@ class PinController extends Controller
 
     public function show($pin_id){
         $pin = Pin::find($pin_id);
-        return view('pins.show', compact('pin'));
+        $flag = Flag::find($pin->flag_id);
+        return view('pins.show', compact('pin', 'flag'));
     }
 }
