@@ -19,13 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('laravel');
 
-Route::get('/plan', function () {
-    return view('plan');
-});
+Route::get('/finance', function (){
+    return view('finance.tinkof');
+})->name('tinkof');
+
 
 Route::get('/pins', [PinController::class, 'index'])->name('pins.index');
 Route::get('/pins/create', [PinController::class, 'create'])->name('pins.create');
 Route::post('/pins', [PinController::class, 'store'])->name('pins.store');
+Route::get('/pins/{pin_id}', [PinController::class, 'show'])->name('pins.show');
 
 // Laravel Breeze +
 

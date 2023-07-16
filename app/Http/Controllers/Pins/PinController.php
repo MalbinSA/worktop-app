@@ -11,12 +11,10 @@ class PinController extends Controller
 {
     public function index()
     {
-        // TODO добавать в шаблон отображение послендних заметок в формате:
-        // Заголовок + краткое содержание самой заметки
-        //
 
-        $pins = Pin::all();
-        return view('pins.list', compact('pins'));
+        $pins = Pin::orderBy('id','desc')->get();
+//        $teg = Flag::all();
+        return view('pins.list', compact('pins' ));
     }
 
     public function create()
@@ -33,5 +31,11 @@ class PinController extends Controller
             'flag_id' => $request->flag_id,
         ]);
         return redirect()->route('pins.index');
+    }
+
+    public function show($pin_id){
+        $pin = Pin::find($pin_id);
+        return view('pins.show', compact('pin'));
+
     }
 }
