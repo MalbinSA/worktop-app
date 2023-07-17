@@ -26,7 +26,7 @@ Route::get('/plan', function () {
 Route::get('/pins', [PinController::class, 'index'])->name('pins.index');
 Route::get('/pins/create', [PinController::class, 'create'])->name('pins.create');
 Route::post('/pins', [PinController::class, 'store'])->name('pins.store');
-Route::get('/pins/{pin}', [PinController::class, 'show'])->name('pin.show');
+Route::get('/pins/{pin}', [PinController::class, 'show'])->name('pins.show');
 
 // Laravel Breeze +
 

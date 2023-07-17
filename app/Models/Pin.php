@@ -9,4 +9,9 @@ class Pin extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function flag()
+    {
+        return $this->belongsTo(Flag::class);
+    }
 }
