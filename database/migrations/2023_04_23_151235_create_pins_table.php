@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('text');
-            $table->integer('flag')->default(4);
+            $table->unsignedBigInteger('flag_id');
             $table->timestamps();
+
+            $table->foreign('flag_id')->references('id')->on('flags');
         });
+
+
     }
 
     /**
