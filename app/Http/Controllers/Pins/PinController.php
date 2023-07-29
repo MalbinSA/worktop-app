@@ -12,8 +12,9 @@ class PinController extends Controller
     public function index()
     {
 
-        $pins = Pin::orderBy('id','desc')->get();
-//        $teg = Flag::all();
+        $pins = Pin::with('flag')
+            ->orderBy('id','desc')
+            ->get();
         return view('pins.list', compact('pins' ));
     }
 
@@ -33,7 +34,8 @@ class PinController extends Controller
         return redirect()->route('pins.index');
     }
 
-    public function show($pin_id){
+    public function show($pin_id)
+    {
         $pin = Pin::find($pin_id);
         return view('pins.show', compact('pin'));
 
