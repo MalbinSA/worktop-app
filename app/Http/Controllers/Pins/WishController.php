@@ -12,7 +12,8 @@ class WishController extends Controller
     public function index(Request $request)
     {
         $currentUser = $request->user();
-        $wishes = Wish::where('user_id', $currentUser->id)->get();
+        $wishes = Wish::where('user_id', $currentUser->id)
+        ->paginate(12);
 
         return view('pins.wishes.index', compact('wishes'));
 

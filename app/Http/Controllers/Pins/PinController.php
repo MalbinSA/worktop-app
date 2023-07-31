@@ -14,7 +14,7 @@ class PinController extends Controller
 
         $pins = Pin::with('flag')
             ->orderBy('id','desc')
-            ->get();
+            ->paginate(12);
         return view('pins.list', compact('pins' ));
     }
 

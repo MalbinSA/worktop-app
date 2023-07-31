@@ -10,7 +10,7 @@
                href="{{route('wishes.index')}}">{{ __('Wish list') }}</a>
         </div>
     </x-slot>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4 ml-4 mr-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 py-4 ml-4 mr-4">
         @foreach ($wishes as $wish)
             <div class="grid bg-white rounded-lg shadow-md p-4">
                 <div class="flex">
