@@ -1,43 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite('resources/css/app.css')
-</head>
-<body>
-<div>
-    <ul role="list" class="divide-y divide-gray-100">
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Leslie Alexander</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">leslie.alexander@example.com</p>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Your pins') }}
+        </h2>
+        <a class="font-semibold text-gray-800 dark:text-gray-200 leading-tight"
+           href="/pins/create">{{__('Create pin')}}</a>
+    </x-slot>
+    <div class="py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-4 mr-4">
+            @foreach ($pins as $pin)
+                <div class="bg-white rounded-lg shadow-md p-4">
+                    <div class="flex">
+                        <div class="w-3/4">
+                        <h2 class="text-xl font-semibold mb-2">
+                            <a href="{{route('pins.show', ['pin'=> $pin->id])}}">{{ $pin->title }}</a>
+                        </h2>
+                        </div>
+                        <div class="w-1/4 flex justify-end">
+                            <h3>{{$pin->flag->color}}</h3>
+                        </div>
+                    </div>
+                    <div>
+                    @if (mb_strlen($pin->text) > 100)
+                        <p class="text-gray-600">{{ mb_strimwidth($pin->text, 0, 100, "...") }}
+                            <a href="{{route('pins.show', ['pin' => $pin->id])}}"
+                               class="underline offset-1 hover:shadow-lg">Read next-></a>
+                        </p>
+                    @else
+                        <p class="text-gray-600">{{$pin->text}}</p>
+                    @endif
+                    </div>
+                    <div class="flex justify-end items-end">
+                        <p class="text-sm text-gray-400">{{substr($pin->created_at,0,10)}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Michael Foster</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">michael.foster@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Co-Founder / CTO</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>
-            </div>
-        </li>
-    </ul>
-</div>
-</body>
-</html>
+            @endforeach
+        </div>
+    </div>
+
+</x-app-layout>
