@@ -5,4 +5,9 @@
         </h2>
     </x-slot>
 
+    <div class="grid grid-cols-3 gap-3">
+
+
+    </div>
+
 </x-app-layout>

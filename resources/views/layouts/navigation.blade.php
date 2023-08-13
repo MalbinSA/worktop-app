@@ -18,9 +18,9 @@
                     <x-nav-link :href="route('pins.index')" :active="request()->routeIs('pins.index')">
                         {{ __('Pins') }}
                     </x-nav-link>
-{{--                    <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">--}}
-{{--                        {{ __('finance') }}--}}
-{{--                    </x-nav-link>--}}
+                    <x-nav-link :href="route('finance.index')" :active="request()->routeIs('finance.index')">
+                        {{ __('Finance') }}
+                    </x-nav-link>
                 </div>
             </div>
 

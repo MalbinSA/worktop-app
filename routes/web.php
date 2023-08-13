@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Finance\FinanceController;
 use App\Http\Controllers\Pins\WishController;
 use App\Http\Controllers\Pins\PinController;
 use App\Http\Controllers\ProfileController;
@@ -20,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('laravel');
 
-Route::get('/finance', function () {
-    return view('finance.tinkof');
-})->name('tinkof');
+Route::prefix('finance')->group(function () {
+    Route::get('/', [FinanceController::class, 'index'])->name('finance.index');
+});
 
 // All pins
 Route::prefix('pins')->group(function () {
