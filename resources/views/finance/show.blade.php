@@ -6,6 +6,10 @@
     </x-slot>
 
     <div class="grid grid-cols-3 gap-3">
+        @foreach($expenses as $expense)
+        <table>
+
+        </table>
 
 
     </div>

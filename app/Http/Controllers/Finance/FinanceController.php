@@ -10,17 +10,25 @@ class FinanceController extends Controller
 {
     public function index(Request $request)
     {
-        $income = Transaction::select('category_id', \DB::raw('SUM(value) as category_sum'))
+        $currentYear = 2001;
+
+        $incomes = Transaction::select('category_id', \DB::raw('SUM(value) as category_sum'))
             ->where('type', 'income')
             ->where('user_id', $request->user()->id)
-            ->whereYear('date', $currentYear)
+            ->whereYear('date', '>', $currentYear)
             ->groupBy('category_id')
             ->get();
-        dd($income);
-        $expense = Transaction::where('type', 'expense')->get();
 
-        dd($income);
+        $expenses = Transaction::select('category_id', \DB::raw('SUM(value) as category_sum'))
+            ->where('type', 'expense')
+            ->where('user_id', $request->user()->id)
+            ->whereYear('date', '>', $currentYear)
+            ->groupBy('category_id')
+            ->get();
 
-        return view('finance/show');
+//        $type = gettype($incomes);
+//        dd($type);
+
+        return view('finance/show', compact($incomes));
     }
 }
