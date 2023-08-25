@@ -3,32 +3,43 @@
 namespace App\Http\Controllers\Finance;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class FinanceController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $selectedYear = null)
     {
-        $currentYear = 2001;
+        $currentYear = $this->getCurrentYear($selectedYear);
+        $transactions = $this->incomeTransactionsForYear($currentYear, $request);
 
-        $incomes = Transaction::select('category_id', \DB::raw('SUM(value) as category_sum'))
-            ->where('type', 'income')
+        $transactionsByMonth = $transactions->groupBy(function ($transaction) {
+            return Carbon::parse($transaction->date)->format('Y-m');
+        });
+
+        $CategoryTransactionsByMonth = $transactionsByMonth->map(function ($mothTransactions) {
+            return $mothTransactions->groupBy('type')->map(function ($byCategory) {
+                return $byCategory->groupBy('category_id');
+            });
+        });
+
+        dd($CategoryTransactionsByMonth);
+
+        return view('finance.show', compact('CategoryTransactionsByMonth', 'currentYear'));
+    }
+
+    private function getCurrentYear($selectedYear)
+    {
+        return isset($selectedYear) ? $selectedYear : date('Y');
+    }
+
+    private function incomeTransactionsForYear($currentYear, $request)
+    {
+        return Transaction::whereYear('date', $currentYear)
+            ->orderBy('date')
             ->where('user_id', $request->user()->id)
-            ->whereYear('date', '>', $currentYear)
-            ->groupBy('category_id')
             ->get();
-
-        $expenses = Transaction::select('category_id', \DB::raw('SUM(value) as category_sum'))
-            ->where('type', 'expense')
-            ->where('user_id', $request->user()->id)
-            ->whereYear('date', '>', $currentYear)
-            ->groupBy('category_id')
-            ->get();
-
-//        $type = gettype($incomes);
-//        dd($type);
-
-        return view('finance/show', compact($incomes));
     }
 }
