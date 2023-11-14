@@ -25,9 +25,11 @@ class FinanceController extends Controller
             });
         });
 
+//        $month = $CategoryTransactionsByMonth[0];
+
         dd($CategoryTransactionsByMonth);
 
-        return view('finance.show', compact('CategoryTransactionsByMonth', 'currentYear'));
+        return view('finance.show', compact('CategoryTransactionsByMonth', 'currentYear', 'month'));
     }
 
     private function getCurrentYear($selectedYear)

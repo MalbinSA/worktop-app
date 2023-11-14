@@ -12,11 +12,10 @@
             <div class="grid mr-3">
                 <div class="rounded-3 bg-white">
                     <h3>{{ $month }}</h3>
-                    <table class="table-auto border border-separate">
+                    <table class="table-auto border border-separate">transactions
                         <thead>
                         <tr>
-{{--                            <th class="border border-slate-600">Дата</th>--}}
-{{--                            <th class="border border-slate-600">Тип</th>--}}
+                            <th class="border border-slate-600">Тип</th>
                             <th class="border border-slate-600">Категория</th>
                             <th class="border border-slate-600">Сумма</th>
                             <!-- Другие заголовки столбцов -->
@@ -25,7 +24,6 @@
                         <tbody>
                         @foreach ($transactions as $transaction)
                             <tr>
-                                <td class="border border-slate-700 m-3">{{ $transaction->date }}</td>
                                 <td class="border border-slate-700 m-3">{{ $transaction->type == 'income' ? '+' : '-' }}</td>
                                 <td class="border border-slate-700 m-3">{{ $transaction->category->name }}</td>
                                 <td class="border border-slate-700 m-3">{{ $transaction->value }}</td>
